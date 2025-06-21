@@ -1,39 +1,30 @@
 interface IUserProps {
-  id?: string | null;
+  id: string ;
   name: string;
-  email: string
-  passwordHashed: string;
-  createdAt: Date | null;
-  isActive: boolean;
+  email: string;
+  birthDate: string;
+  password: string;
+  createdAt?: Date | null;
+  isActive?: boolean | null;
 }
 
-export class User {
-  private props: IUserProps;
+class User {
+  readonly props: IUserProps;
 
   constructor(props: IUserProps) {
+    // If user didnt provide a createdAt date, set it to now
     if(props.createdAt === undefined || props.createdAt === null) {
       props.createdAt = new Date();
     }
-    
+
+    // If user didnt provide an isActive status, set it to true
     if (props.isActive === undefined || props.isActive === null) {
       props.isActive = true;
     }
     this.props = props;
   }
 
-  isValidForLogin(): boolean {
-    return this.props.isActive;
 
-  }
-
-  static create(
-    id: string | null = null,
-    name: string,
-    email: string,
-    passwordHashed: string,
-    createdAt: Date = new Date(),
-    isActive: boolean = true
-  ): User {
-    return new User({ id, name, email, passwordHashed, createdAt, isActive });
-  }
 }
+
+export { User };

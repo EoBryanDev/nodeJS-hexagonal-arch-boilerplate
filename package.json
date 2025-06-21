@@ -1,5 +1,5 @@
 {
-  "name": "nodeJS-hexagonal-arch-boilerplate",
+  "name": "nodejs-hexagonal-arch-boilerplate",
   "version": "1.0.0",
   "description": "hexagonal architecture boilerplate for Node.js applications",
   "main": "server.js",

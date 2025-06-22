@@ -66,14 +66,19 @@ Este projeto é um boilerplate simples utilizando arquitetura hexagonal para a f
 ## Como Usar
 
 1. Instale as dependências:
+
    ```sh
    pnpm install
    ```
+
 2. Execute o servidor de desenvolvimento:
+
    ```sh
    pnpm start
    ```
+
 3. Execute os testes:
+
    ```sh
    pnpm test
    ```

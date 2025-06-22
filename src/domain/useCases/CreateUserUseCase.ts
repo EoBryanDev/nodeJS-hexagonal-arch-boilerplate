@@ -1,10 +1,15 @@
 import { CreateUserDTO } from "../../application/dtos/create-use.dto";
 import { User } from "../entities/User";
 import { IUserRepository } from "../repositories/IUserRepository";
+import { IHashPassword } from "../services/IHashPassword";
 import { IIdGenerator } from "../services/IIdGenerator";
 
 class CreateUserUserCase {
-  constructor(private userRepository: IUserRepository, private idGenerator: IIdGenerator) { }
+  constructor(
+    private userRepository: IUserRepository,
+    private idGenerator: IIdGenerator,
+    private hashPassword: IHashPassword)
+  {}
 
   async execute(userData: CreateUserDTO): Promise<User> {
 
@@ -15,8 +20,9 @@ class CreateUserUserCase {
     }
     const id = this.idGenerator.generate();
     const data = {
-      id,
       ...userData,
+      id,
+      password: await this.hashPassword.hash(userData.password),
     }
     // Create user
     const user = await this.userRepository.create({ props: data });

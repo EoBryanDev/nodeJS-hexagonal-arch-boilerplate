@@ -1,12 +1,13 @@
 import { HttpAdapter, HttpRequest, HttpResponse } from "../services/HttpAdapters";
 
 class FastifyAdapter extends HttpAdapter {
-  adaptRequest(req: any): HttpRequest {
-    return {
-      body: req.body,
-      params: req.params,
-      query: req.query,
-    };
+  adaptRequest<T = any, U = Record<string, string>, V = Record<string, string>>(req: any): HttpRequest<T, U, V> {
+return {
+  body: req.body as T,
+  params: req.params as U,
+  query: req.query as V,
+  headers: req.headers as Record<string, string>
+};
   }
 
   adaptResponse(res: HttpResponse, originalRes: any): void {

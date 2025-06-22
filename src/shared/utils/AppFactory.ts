@@ -1,4 +1,5 @@
 import { CreateUserUserCase } from "../../domain/useCases/CreateUserUseCase";
+import { BCryptHashedPwd } from "../../infrastructure/database/external/services/BCryptHashedPwd";
 import { CryptoUuidGenerator } from "../../infrastructure/database/external/services/CryptoUuidGenerator";
 import { InMemoryUserRepository } from "../../infrastructure/database/repositories/InMemoryUserRepository";
 import { FastifyAdapter } from "../../presentation/http/adapters/FastifyAdapter";
@@ -10,9 +11,10 @@ export class AppFactory {
     const userRepository = new InMemoryUserRepository();
     const idGenerator = new CryptoUuidGenerator();
     const httpAdapter = new FastifyAdapter();
+    const bCryptHashedPwd = new BCryptHashedPwd();
 
     // Use Cases
-    const createUserUseCase = new CreateUserUserCase(userRepository, idGenerator);
+    const createUserUseCase = new CreateUserUserCase(userRepository, idGenerator, bCryptHashedPwd);
     // const getUserUseCase = new GetUserUseCase(userRepository);
     // const deleteUserUseCase = new DeleteUserUseCase(userRepository);
 

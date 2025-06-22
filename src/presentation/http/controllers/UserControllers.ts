@@ -1,3 +1,4 @@
+import { CreateUserDTO } from "../../../application/dtos/create-use.dto";
 import { CreateUserUserCase } from "../../../domain/useCases/CreateUserUseCase"
 import { HttpAdapter, HttpResponse } from "../services/HttpAdapters"
 
@@ -10,8 +11,7 @@ class UserController {
 
   async createUser(originalReq: any, originalRes: any): Promise<void> {
     try {
-      const req = this.httpAdapter.adaptRequest(originalReq);
-
+      const req = this.httpAdapter.adaptRequest<CreateUserDTO>(originalReq);
       // Validação com Zod na camada de apresentação
       // const validatedData = CreateUserSchema.parse(req.body);
       const validatedData = req.body;
